@@ -6,17 +6,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.techiekernel.service.FooBarService;
+import com.techiekernel.service.*;
 
 @Component
 public class FooBarWS {
-	//@Autowired
+
 	FooBarService fooBarService;
  
 	@GET
-	@Path("/{param}")
+	@Path("/foobar/{param}")
 	public Response getMessage(@PathParam("param") String msg) {
 		return Response.status(200).entity(fooBarService.getMessage(msg)).build();
 	}
