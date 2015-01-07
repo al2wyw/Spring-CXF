@@ -1,15 +1,13 @@
-package xpadro.tutorial.rest.repositorytest;
+package xpadro.tutorial.rest.repository;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import org.testng.annotations.*;
 import org.testng.AssertJUnit;
-import org.easymock.EasyMock;
 
 import xpadro.tutorial.rest.model.Product;
 import xpadro.tutorial.rest.model.Warehouse;
-import xpadro.tutorial.rest.repository.WarehouseRepositoryImpl;
 
 public class WarehouseRepositoryImplTest {
 	@Test
@@ -24,7 +22,7 @@ public class WarehouseRepositoryImplTest {
 		product = new Product(3, "PROD_125");
 		products.add(product);
 		Warehouse expected = new Warehouse(1, "WAR_BCN_004", products);
-		//AssertJUnit.assertSame(warehouse, expected);
+		AssertJUnit.assertEquals(expected, warehouse);
 	}
 	
 }

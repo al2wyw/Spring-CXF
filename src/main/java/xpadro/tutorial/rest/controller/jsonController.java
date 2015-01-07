@@ -1,6 +1,7 @@
 package xpadro.tutorial.rest.controller;
 
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import xpadro.tutorial.rest.model.jsonResponse;
+import xpadro.tutorial.rest.model.xmlResponse;
 
 @Controller
 public class jsonController {
@@ -23,6 +25,16 @@ public class jsonController {
 		response.setType(type);
 		response.setSuccessMsg("get the json successfully");
 		response.setBody("http://test.com/view/code");
+		return response;
+	}
+	
+	@RequestMapping(value="/xml/{type}", method=RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody xmlResponse getResponseAsXML(@PathVariable("type") String type){
+		xmlResponse response = new xmlResponse();
+		response.setType(type);
+		response.setBody("http://test.com/view/code");
+		response.setId(123);
 		return response;
 	}
 	
