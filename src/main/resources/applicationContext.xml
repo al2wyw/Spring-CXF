@@ -60,4 +60,22 @@
 	<bean id="placeholderConfigBean" class="xpadro.tutorial.rest.model.PlaceholderConfigBean">
 		<property name="test" value="${testfucktest}"/>
 	</bean>
+	<!-- 	this does not work but the following hashmap works!
+	<bean id="props" class="java.util.Properties">  
+	    <constructor-arg index="0">  
+	       <props>  
+	          <prop key="abc">123</prop>  
+	       </props>  
+	    </constructor-arg>  
+	</bean> 
+	-->
+	<bean id="props" class="java.util.HashMap">  
+	    <constructor-arg index="0">  
+	       <map>  
+	          <entry key="abc" value="234"/>  
+	       </map>  
+	    </constructor-arg>  
+	</bean> 
+	
+
 </beans>

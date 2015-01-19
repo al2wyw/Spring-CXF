@@ -23,11 +23,11 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
 
 	@Override
 	protected String resolvePlaceholder(String placeholder, Properties props) {
-		if(helper==null)
-			System.out.println("helper is null");
-		if(helper!=null)
+
+		if(helper!=null){
+			placeholder="${"+placeholder+"}";
 			return helper.replacePlaceholders(placeholder, props);
-		else
+		}else
 			return super.resolvePlaceholder(placeholder, props);
 	}
 	
