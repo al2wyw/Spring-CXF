@@ -76,15 +76,15 @@ public class Guava {
 		list.add(null);
 		
 		List<model> alist  = Ordering.allEqual().nullsFirst().sortedCopy(list);
-		for(model m:alist){
-			if(m != null)
-				
-				System.out.println(m.getI()+"  "+m.getJ());
-			
-			else
-				
-				System.out.println("null");
-		}
+		showModels(alist);
+		
+		Iterables.removeIf(list, new Predicate<model>(){
+			public boolean apply(model s){
+				return s == null;
+			}
+		});
+		
+		showModels(list);
 		
 		ArrayList<model> list2 = Lists.newArrayListWithCapacity(10);
 		
@@ -96,15 +96,7 @@ public class Guava {
 		Iterable<model> it = FluentIterable.from(Iterables.concat(list, list2))
 							.filter(Predicates.notNull())
 							.toList();
-		for(model m:it){
-			if(m != null)
-				
-				System.out.println(m.getI()+"  "+m.getJ());
-			
-			else
-				
-				System.out.println("null");
-		}
+		showModels((List<model>)it);
 		
 		Multimap<String,model> map = HashMultimap.create();
 		map.put("123", new model(3,2));
@@ -112,9 +104,9 @@ public class Guava {
 		map.put("124", new model(4,2));
 		map.put("124", new model(4,3));
 		
-		Multimap<String,model> maps = Multimaps.filterKeys(map, new Predicate<String>(){
+		Multimap<String,model> maps = Multimaps.filterKeys(map, new Predicate<String>(){//filter means filter in, not filter out
 			public boolean apply(String s){
-				return !s.equals("123");//false to start work
+				return !s.equals("123");
 			}
 		});
 		
@@ -133,11 +125,29 @@ public class Guava {
 		model m = null;
 		Optional<model> option = Optional.fromNullable(m);
 		Optional<model> opt = Optional.absent();
+		Optional<model> op = Optional.of(new model(5,6));
+		
 		if(option.isPresent()){
 			System.out.println("is present");
 		}
 		if(opt.isPresent()){
 			System.out.println("is present");
 		}
+		if(op.isPresent()){
+			System.out.println("is present");
+		}
+	}
+	
+	private static void showModels(List<model> it){
+		for(model m:it){
+			if(m != null)
+				
+				System.out.println(m.getI()+"  "+m.getJ());
+			
+			else
+				
+				System.out.println("null");
+		}
+		System.out.println("");
 	}
 }
