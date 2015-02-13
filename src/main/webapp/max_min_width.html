@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-1.11.1.js"></script>
+<script>
+	$(function(){
+		$("#test").click(function(){
+			alert($("#value")[0].value);
+			$("div").css("width",$("#value").val());
+		});
+	});
+</script>
+</head>
+<body>
+<!-- responsive div must use % to define the width, otherwise the horizontal scroll bar will come -->
+<!-- min-width can prevent the width from being smaller,but if we change min-width along with width, it will be smaller -->
+<div style="background-color:grey;width:600px;min-width:800px">test</div>
+<input id="value" type="text" value="100px"/>
+<button id="test">test</button>
+</body>
+</html>
