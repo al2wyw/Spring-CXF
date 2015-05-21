@@ -1,5 +1,12 @@
 @CHARSET "UTF-8";
 
+body{
+	margin:0px;
+	padding:0px;
+	border:0px;
+	/* the width of body is the size of the content window, will change as resize the window */
+	/* the height of body is unlimited */
+}
 #lineitemtable tbody td{
 	text-align: right;
 	padding: 5px 10px 5px 10px;
@@ -7,4 +14,22 @@
 
 #lineitemtable{
 	border-collapse: collapse;
+}
+
+#table-wrapper{
+	width: 100%;
+	height: 600px;
+	overflow: scroll;
+}
+
+#tableHeader{
+	padding-top: 5px;
+	height: 50px;
+}
+/* border-style is not set, border-width will take no effect */
+#button-wrapper{
+	padding-top: inherit;
+	width: 125px;
+	margin: 0 auto;
+	/* set width not to default auto to make margin take effect: % and length. inherit will be the same as parent, initial is auto */
 }

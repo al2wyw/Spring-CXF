@@ -34,6 +34,7 @@
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 	
+	<!-- have better to setup the property name  via columnOverride-->
     <table schema="sale" tableName="customer" domainObjectName="Customer" >
       <property name="useActualColumnNames" value="true"/>
     </table>
