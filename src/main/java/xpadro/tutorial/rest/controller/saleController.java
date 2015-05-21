@@ -24,7 +24,7 @@ public class saleController {
 	@Autowired
 	private LineitemMapper lineitemMapper;
 	
-	@RequestMapping(value="/sale/lineitem", method=RequestMethod.GET)
+	@RequestMapping(value="/sale/lineitem", method=RequestMethod.GET, produces={"text/html"})
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
 	public ModelAndView getLineItemByPage(@RequestParam("offset")int offset,@RequestParam("limit")int limit){
@@ -50,5 +50,13 @@ public class saleController {
 		List<Lineitem> lineitem = lineitemMapper.selectByPage(offset, limit);
 		model.addObject("lineitem", lineitem);
 		return model;
+	}
+
+	@RequestMapping(value="/sale/lineitem", method=RequestMethod.GET, produces={"application/json"})
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.OK)
+	public List<Lineitem> getLineItemByPageAsJson(@RequestParam("offset")int offset,@RequestParam("limit")int limit){
+		List<Lineitem> lineitem = lineitemMapper.selectByPage(offset, limit);
+		return lineitem;
 	}
 }

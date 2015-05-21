@@ -26,12 +26,14 @@
 			var searchParameters= {};
 			searchParameters.offset = num;
 			searchParameters.limit = limit;
-			var result = $.get("/Spring-CXF/spring/sale", searchParameters, "json");
+			var result = $.get("/Spring-CXF/spring/sale/lineitem", searchParameters, "json");
 			if(typeof result != "undefined"){
 				var body = $("#lineitemtable").find("tbody");
-				$("#lineitemtable").detach(body);
-				var newBody = $.templates("#lineitemTemplate").render(result);
-				$("#lineitemtable").children("thead").append(newBody);
+				body.empty();
+				var newBody = $.templates("#lineitemTemplate").render(result.responseJSON);
+				body.html(newBody);
+				body.find("td").css({"text-align": "right","padding": "5px 10px 5px 10px"});
+				body.find("tr:even").css("background-color","#D1D1D1");
 			}
 		})
 		$("#grid-next").click(function(){
@@ -40,8 +42,7 @@
 	});
 </script>
 <script id="lineitemTemplate" type="text/x-jsrender">
-<tbody>
-	<tr>
+<tr>
 	<td>{{:l_ORDERKEY}}</td>
 	<td>{{:l_LINEINT}}</td>
 	<td>{{:l_PARTKEY}}</td>
@@ -59,7 +60,6 @@
 	<td>{{:l_SHIPMODE}}</td>
 	<td>{{:l_COMMENT}}</td>
 </tr>
-</tbody>
 </script>
 </head>
 <body>
