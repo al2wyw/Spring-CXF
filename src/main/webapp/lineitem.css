@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+#lineitemtable tbody td{
+	text-align: right;
+	padding: 5px 10px 5px 10px;
+}
+
+#lineitemtable{
+	border-collapse: collapse;
+}

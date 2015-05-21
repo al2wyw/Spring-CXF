@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xpadro.tutorial.rest.repository.LineitemMapper" >
+  <resultMap id="BaseResultMap" type="xpadro.tutorial.rest.model.mybatis.Lineitem" >
+    <id column="L_ORDERKEY" property="l_ORDERKEY" jdbcType="INTEGER" />
+    <id column="L_LINEINT" property="l_LINEINT" jdbcType="INTEGER" />
+    <result column="L_PARTKEY" property="l_PARTKEY" jdbcType="INTEGER" />
+    <result column="L_SUPPKEY" property="l_SUPPKEY" jdbcType="INTEGER" />
+    <result column="L_QUANTITY" property="l_QUANTITY" jdbcType="DOUBLE" />
+    <result column="L_EXTENDEDPRICE" property="l_EXTENDEDPRICE" jdbcType="DOUBLE" />
+    <result column="L_DISCOUNT" property="l_DISCOUNT" jdbcType="DOUBLE" />
+    <result column="L_TAX" property="l_TAX" jdbcType="DOUBLE" />
+    <result column="L_RETURNFLAG" property="l_RETURNFLAG" jdbcType="CHAR" />
+    <result column="L_LINESTATUS" property="l_LINESTATUS" jdbcType="CHAR" />
+    <result column="L_SHIPDATE" property="l_SHIPDATE" jdbcType="DATE" />
+    <result column="L_COMMITDATE" property="l_COMMITDATE" jdbcType="DATE" />
+    <result column="L_RECEIPTDATE" property="l_RECEIPTDATE" jdbcType="DATE" />
+    <result column="L_SHIPINSTRUCT" property="l_SHIPINSTRUCT" jdbcType="CHAR" />
+    <result column="L_SHIPMODE" property="l_SHIPMODE" jdbcType="CHAR" />
+    <result column="L_COMMENT" property="l_COMMENT" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    L_ORDERKEY, L_LINEINT, L_PARTKEY, L_SUPPKEY, L_QUANTITY, L_EXTENDEDPRICE, L_DISCOUNT, 
+    L_TAX, L_RETURNFLAG, L_LINESTATUS, L_SHIPDATE, L_COMMITDATE, L_RECEIPTDATE, L_SHIPINSTRUCT, 
+    L_SHIPMODE, L_COMMENT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="xpadro.tutorial.rest.model.mybatis.LineitemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lineitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="xpadro.tutorial.rest.model.mybatis.LineitemKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from lineitem
+    where L_ORDERKEY = #{l_ORDERKEY,jdbcType=INTEGER}
+      and L_LINEINT = #{l_LINEINT,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="xpadro.tutorial.rest.model.mybatis.LineitemKey" >
+    delete from lineitem
+    where L_ORDERKEY = #{l_ORDERKEY,jdbcType=INTEGER}
+      and L_LINEINT = #{l_LINEINT,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="xpadro.tutorial.rest.model.mybatis.LineitemExample" >
+    delete from lineitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xpadro.tutorial.rest.model.mybatis.Lineitem" >
+    insert into lineitem (L_ORDERKEY, L_LINEINT, L_PARTKEY, 
+      L_SUPPKEY, L_QUANTITY, L_EXTENDEDPRICE, 
+      L_DISCOUNT, L_TAX, L_RETURNFLAG, 
+      L_LINESTATUS, L_SHIPDATE, L_COMMITDATE, 
+      L_RECEIPTDATE, L_SHIPINSTRUCT, L_SHIPMODE, 
+      L_COMMENT)
+    values (#{l_ORDERKEY,jdbcType=INTEGER}, #{l_LINEINT,jdbcType=INTEGER}, #{l_PARTKEY,jdbcType=INTEGER}, 
+      #{l_SUPPKEY,jdbcType=INTEGER}, #{l_QUANTITY,jdbcType=DOUBLE}, #{l_EXTENDEDPRICE,jdbcType=DOUBLE}, 
+      #{l_DISCOUNT,jdbcType=DOUBLE}, #{l_TAX,jdbcType=DOUBLE}, #{l_RETURNFLAG,jdbcType=CHAR}, 
+      #{l_LINESTATUS,jdbcType=CHAR}, #{l_SHIPDATE,jdbcType=DATE}, #{l_COMMITDATE,jdbcType=DATE}, 
+      #{l_RECEIPTDATE,jdbcType=DATE}, #{l_SHIPINSTRUCT,jdbcType=CHAR}, #{l_SHIPMODE,jdbcType=CHAR}, 
+      #{l_COMMENT,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xpadro.tutorial.rest.model.mybatis.Lineitem" >
+    insert into lineitem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="l_ORDERKEY != null" >
+        L_ORDERKEY,
+      </if>
+      <if test="l_LINEINT != null" >
+        L_LINEINT,
+      </if>
+      <if test="l_PARTKEY != null" >
+        L_PARTKEY,
+      </if>
+      <if test="l_SUPPKEY != null" >
+        L_SUPPKEY,
+      </if>
+      <if test="l_QUANTITY != null" >
+        L_QUANTITY,
+      </if>
+      <if test="l_EXTENDEDPRICE != null" >
+        L_EXTENDEDPRICE,
+      </if>
+      <if test="l_DISCOUNT != null" >
+        L_DISCOUNT,
+      </if>
+      <if test="l_TAX != null" >
+        L_TAX,
+      </if>
+      <if test="l_RETURNFLAG != null" >
+        L_RETURNFLAG,
+      </if>
+      <if test="l_LINESTATUS != null" >
+        L_LINESTATUS,
+      </if>
+      <if test="l_SHIPDATE != null" >
+        L_SHIPDATE,
+      </if>
+      <if test="l_COMMITDATE != null" >
+        L_COMMITDATE,
+      </if>
+      <if test="l_RECEIPTDATE != null" >
+        L_RECEIPTDATE,
+      </if>
+      <if test="l_SHIPINSTRUCT != null" >
+        L_SHIPINSTRUCT,
+      </if>
+      <if test="l_SHIPMODE != null" >
+        L_SHIPMODE,
+      </if>
+      <if test="l_COMMENT != null" >
+        L_COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="l_ORDERKEY != null" >
+        #{l_ORDERKEY,jdbcType=INTEGER},
+      </if>
+      <if test="l_LINEINT != null" >
+        #{l_LINEINT,jdbcType=INTEGER},
+      </if>
+      <if test="l_PARTKEY != null" >
+        #{l_PARTKEY,jdbcType=INTEGER},
+      </if>
+      <if test="l_SUPPKEY != null" >
+        #{l_SUPPKEY,jdbcType=INTEGER},
+      </if>
+      <if test="l_QUANTITY != null" >
+        #{l_QUANTITY,jdbcType=DOUBLE},
+      </if>
+      <if test="l_EXTENDEDPRICE != null" >
+        #{l_EXTENDEDPRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="l_DISCOUNT != null" >
+        #{l_DISCOUNT,jdbcType=DOUBLE},
+      </if>
+      <if test="l_TAX != null" >
+        #{l_TAX,jdbcType=DOUBLE},
+      </if>
+      <if test="l_RETURNFLAG != null" >
+        #{l_RETURNFLAG,jdbcType=CHAR},
+      </if>
+      <if test="l_LINESTATUS != null" >
+        #{l_LINESTATUS,jdbcType=CHAR},
+      </if>
+      <if test="l_SHIPDATE != null" >
+        #{l_SHIPDATE,jdbcType=DATE},
+      </if>
+      <if test="l_COMMITDATE != null" >
+        #{l_COMMITDATE,jdbcType=DATE},
+      </if>
+      <if test="l_RECEIPTDATE != null" >
+        #{l_RECEIPTDATE,jdbcType=DATE},
+      </if>
+      <if test="l_SHIPINSTRUCT != null" >
+        #{l_SHIPINSTRUCT,jdbcType=CHAR},
+      </if>
+      <if test="l_SHIPMODE != null" >
+        #{l_SHIPMODE,jdbcType=CHAR},
+      </if>
+      <if test="l_COMMENT != null" >
+        #{l_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xpadro.tutorial.rest.model.mybatis.LineitemExample" resultType="java.lang.Integer" >
+    select count(*) from lineitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lineitem
+    <set >
+      <if test="record.l_ORDERKEY != null" >
+        L_ORDERKEY = #{record.l_ORDERKEY,jdbcType=INTEGER},
+      </if>
+      <if test="record.l_LINEINT != null" >
+        L_LINEINT = #{record.l_LINEINT,jdbcType=INTEGER},
+      </if>
+      <if test="record.l_PARTKEY != null" >
+        L_PARTKEY = #{record.l_PARTKEY,jdbcType=INTEGER},
+      </if>
+      <if test="record.l_SUPPKEY != null" >
+        L_SUPPKEY = #{record.l_SUPPKEY,jdbcType=INTEGER},
+      </if>
+      <if test="record.l_QUANTITY != null" >
+        L_QUANTITY = #{record.l_QUANTITY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.l_EXTENDEDPRICE != null" >
+        L_EXTENDEDPRICE = #{record.l_EXTENDEDPRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="record.l_DISCOUNT != null" >
+        L_DISCOUNT = #{record.l_DISCOUNT,jdbcType=DOUBLE},
+      </if>
+      <if test="record.l_TAX != null" >
+        L_TAX = #{record.l_TAX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.l_RETURNFLAG != null" >
+        L_RETURNFLAG = #{record.l_RETURNFLAG,jdbcType=CHAR},
+      </if>
+      <if test="record.l_LINESTATUS != null" >
+        L_LINESTATUS = #{record.l_LINESTATUS,jdbcType=CHAR},
+      </if>
+      <if test="record.l_SHIPDATE != null" >
+        L_SHIPDATE = #{record.l_SHIPDATE,jdbcType=DATE},
+      </if>
+      <if test="record.l_COMMITDATE != null" >
+        L_COMMITDATE = #{record.l_COMMITDATE,jdbcType=DATE},
+      </if>
+      <if test="record.l_RECEIPTDATE != null" >
+        L_RECEIPTDATE = #{record.l_RECEIPTDATE,jdbcType=DATE},
+      </if>
+      <if test="record.l_SHIPINSTRUCT != null" >
+        L_SHIPINSTRUCT = #{record.l_SHIPINSTRUCT,jdbcType=CHAR},
+      </if>
+      <if test="record.l_SHIPMODE != null" >
+        L_SHIPMODE = #{record.l_SHIPMODE,jdbcType=CHAR},
+      </if>
+      <if test="record.l_COMMENT != null" >
+        L_COMMENT = #{record.l_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lineitem
+    set L_ORDERKEY = #{record.l_ORDERKEY,jdbcType=INTEGER},
+      L_LINEINT = #{record.l_LINEINT,jdbcType=INTEGER},
+      L_PARTKEY = #{record.l_PARTKEY,jdbcType=INTEGER},
+      L_SUPPKEY = #{record.l_SUPPKEY,jdbcType=INTEGER},
+      L_QUANTITY = #{record.l_QUANTITY,jdbcType=DOUBLE},
+      L_EXTENDEDPRICE = #{record.l_EXTENDEDPRICE,jdbcType=DOUBLE},
+      L_DISCOUNT = #{record.l_DISCOUNT,jdbcType=DOUBLE},
+      L_TAX = #{record.l_TAX,jdbcType=DOUBLE},
+      L_RETURNFLAG = #{record.l_RETURNFLAG,jdbcType=CHAR},
+      L_LINESTATUS = #{record.l_LINESTATUS,jdbcType=CHAR},
+      L_SHIPDATE = #{record.l_SHIPDATE,jdbcType=DATE},
+      L_COMMITDATE = #{record.l_COMMITDATE,jdbcType=DATE},
+      L_RECEIPTDATE = #{record.l_RECEIPTDATE,jdbcType=DATE},
+      L_SHIPINSTRUCT = #{record.l_SHIPINSTRUCT,jdbcType=CHAR},
+      L_SHIPMODE = #{record.l_SHIPMODE,jdbcType=CHAR},
+      L_COMMENT = #{record.l_COMMENT,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="xpadro.tutorial.rest.model.mybatis.Lineitem" >
+    update lineitem
+    <set >
+      <if test="l_PARTKEY != null" >
+        L_PARTKEY = #{l_PARTKEY,jdbcType=INTEGER},
+      </if>
+      <if test="l_SUPPKEY != null" >
+        L_SUPPKEY = #{l_SUPPKEY,jdbcType=INTEGER},
+      </if>
+      <if test="l_QUANTITY != null" >
+        L_QUANTITY = #{l_QUANTITY,jdbcType=DOUBLE},
+      </if>
+      <if test="l_EXTENDEDPRICE != null" >
+        L_EXTENDEDPRICE = #{l_EXTENDEDPRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="l_DISCOUNT != null" >
+        L_DISCOUNT = #{l_DISCOUNT,jdbcType=DOUBLE},
+      </if>
+      <if test="l_TAX != null" >
+        L_TAX = #{l_TAX,jdbcType=DOUBLE},
+      </if>
+      <if test="l_RETURNFLAG != null" >
+        L_RETURNFLAG = #{l_RETURNFLAG,jdbcType=CHAR},
+      </if>
+      <if test="l_LINESTATUS != null" >
+        L_LINESTATUS = #{l_LINESTATUS,jdbcType=CHAR},
+      </if>
+      <if test="l_SHIPDATE != null" >
+        L_SHIPDATE = #{l_SHIPDATE,jdbcType=DATE},
+      </if>
+      <if test="l_COMMITDATE != null" >
+        L_COMMITDATE = #{l_COMMITDATE,jdbcType=DATE},
+      </if>
+      <if test="l_RECEIPTDATE != null" >
+        L_RECEIPTDATE = #{l_RECEIPTDATE,jdbcType=DATE},
+      </if>
+      <if test="l_SHIPINSTRUCT != null" >
+        L_SHIPINSTRUCT = #{l_SHIPINSTRUCT,jdbcType=CHAR},
+      </if>
+      <if test="l_SHIPMODE != null" >
+        L_SHIPMODE = #{l_SHIPMODE,jdbcType=CHAR},
+      </if>
+      <if test="l_COMMENT != null" >
+        L_COMMENT = #{l_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where L_ORDERKEY = #{l_ORDERKEY,jdbcType=INTEGER}
+      and L_LINEINT = #{l_LINEINT,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xpadro.tutorial.rest.model.mybatis.Lineitem" >
+    update lineitem
+    set L_PARTKEY = #{l_PARTKEY,jdbcType=INTEGER},
+      L_SUPPKEY = #{l_SUPPKEY,jdbcType=INTEGER},
+      L_QUANTITY = #{l_QUANTITY,jdbcType=DOUBLE},
+      L_EXTENDEDPRICE = #{l_EXTENDEDPRICE,jdbcType=DOUBLE},
+      L_DISCOUNT = #{l_DISCOUNT,jdbcType=DOUBLE},
+      L_TAX = #{l_TAX,jdbcType=DOUBLE},
+      L_RETURNFLAG = #{l_RETURNFLAG,jdbcType=CHAR},
+      L_LINESTATUS = #{l_LINESTATUS,jdbcType=CHAR},
+      L_SHIPDATE = #{l_SHIPDATE,jdbcType=DATE},
+      L_COMMITDATE = #{l_COMMITDATE,jdbcType=DATE},
+      L_RECEIPTDATE = #{l_RECEIPTDATE,jdbcType=DATE},
+      L_SHIPINSTRUCT = #{l_SHIPINSTRUCT,jdbcType=CHAR},
+      L_SHIPMODE = #{l_SHIPMODE,jdbcType=CHAR},
+      L_COMMENT = #{l_COMMENT,jdbcType=VARCHAR}
+    where L_ORDERKEY = #{l_ORDERKEY,jdbcType=INTEGER}
+      and L_LINEINT = #{l_LINEINT,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPage" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" />
+  	from lineitem 
+  	limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+</mapper>

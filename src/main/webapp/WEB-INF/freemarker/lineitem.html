@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/Spring-CXF/lineitem.css" type="text/css" rel="stylesheet"></link>
+<script src="/Spring-CXF/jquery-1.11.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#lineitemtable tbody tr:even").css("background-color","#D1D1D1");
+	});
+</script>
+</head>
+<body>
+<table border="1" id="lineitemtable">
+	<thead>
+	<tr>
+	<#list header as title>
+		<th>${title}</th>
+	</#list>
+	</tr>
+	</thead>
+	<tbody>
+	<#list lineitem as t>
+	<tr>
+	<td>${t.l_ORDERKEY}</td>
+	<td>${t.l_LINEINT}</td>
+	<td>${t.l_PARTKEY}</td>
+	<td>${t.l_SUPPKEY}</td>
+	<td>${t.l_QUANTITY}</td>
+	<td>${t.l_EXTENDEDPRICE}</td>
+	<td>${t.l_DISCOUNT}</td>
+	<td>${t.l_TAX}</td>
+	<td>${t.l_RETURNFLAG}</td>
+	<td>${t.l_LINESTATUS}</td>
+	<td>${t.l_SHIPDATE?date}</td>
+	<td>${t.l_COMMITDATE?date}</td>
+	<td>${t.l_RECEIPTDATE?date}</td>
+	<td>${t.l_SHIPINSTRUCT}</td>
+	<td>${t.l_SHIPMODE}</td>
+	<td>${t.l_COMMENT}</td>
+	</tr>
+	</#list>
+	</tbody>
+</table>
+</body>
+</html>
