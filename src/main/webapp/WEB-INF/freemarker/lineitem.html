@@ -14,11 +14,25 @@
 	while(string.charAt(n)!='&'&&n<string.length ){
 		offset+=string.charAt(n++);
 	}
+	var num = parseInt(offset);
 	
 	$(function(){
 		$("#lineitemtable tbody tr:even").css("background-color","#D1D1D1");
 		$("#grid-prev").click(function(){
-			$.ajax()
+			var limit = 30;
+			num = num-limit;
+			if(num<0)
+				num = 0;
+			var searchParameters= {};
+			searchParameters.offset = num;
+			searchParameters.limit = limit;
+			var result = $.get("/Spring-CXF/spring/sale", searchParameters, "json");
+			if(typeof result != "undefined"){
+				var body = $("#lineitemtable").find("tbody");
+				$("#lineitemtable").detach(body);
+				var newBody = $.templates("#lineitemTemplate").render(result);
+				$("#lineitemtable").children("thead").append(newBody);
+			}
 		})
 		$("#grid-next").click(function(){
 			
