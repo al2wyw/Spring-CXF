@@ -1,6 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--
+jqXHR: success = done
+readyState 
+	4
+getResponseHeader 
+	function(key)
+getAllResponseHeaders
+	
+	function()
+setRequestHeader
+	
+	function(name, value)
+overrideMimeType
+	
+	function(type)
+statusCode
+	
+	function(map)
+abort
+	
+	function(statusText)
+state
+	
+	function()
+always
+	
+	function()
+then
+	
+	function( fnDone, fnFail, fnProgress )
+promise
+	
+	function(obj)
+pipe
+	
+	function( fnDone, fnFail, fnProgress )
+done
+	
+	function()
+fail
+	
+	function()
+progress
+	
+	function()
+complete
+	
+	function()
+success
+	
+	function()
+error
+	
+	function()
+responseText
+	
+	Object { type="longString"}
+responseJSON
+
+	Object
+status
+	
+	200
+statusText
+	
+	"OK" 
+-->
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/Spring-CXF/lineitem.css" type="text/css" rel="stylesheet"></link>
@@ -15,18 +82,28 @@
 		offset+=string.charAt(n++);
 	}
 	var num = parseInt(offset);
-	
+	var limit = 30;
 	$(function(){
 		$("#lineitemtable tbody tr:even").css("background-color","#D1D1D1");
 		$("#grid-prev").click(function(){
-			var limit = 30;
+			if(num == 0)
+				return;
 			num = num-limit;
 			if(num<0)
 				num = 0;
-			var searchParameters= {};
-			searchParameters.offset = num;
-			searchParameters.limit = limit;
-			var result = $.get("/Spring-CXF/spring/sale/lineitem", searchParameters, "json");
+			retrieveData();
+		});
+		$("#grid-next").click(function(){
+			num = num+limit;
+			retrieveData();
+		});
+	});
+	function retrieveData(){
+		var searchParameters= {};
+		searchParameters.offset = num;
+		searchParameters.limit = limit;
+		var result = $.get("/Spring-CXF/spring/sale/lineitem", searchParameters, "json");
+		result.success(function(){
 			if(typeof result != "undefined"){
 				var body = $("#lineitemtable").find("tbody");
 				body.empty();
@@ -35,11 +112,11 @@
 				body.find("td").css({"text-align": "right","padding": "5px 10px 5px 10px"});
 				body.find("tr:even").css("background-color","#D1D1D1");
 			}
-		})
-		$("#grid-next").click(function(){
-			
-		})
-	});
+		});
+		result.fail(function(){
+			alert("can not retrieve data from server");
+		});
+	}
 </script>
 <script id="lineitemTemplate" type="text/x-jsrender">
 <tr>
@@ -68,7 +145,7 @@
 <button id="grid-prev" class="btn-sub-action" type="submit">
 <span>Prev</span>
 </button>
-<button id="grid-prev" class="btn-sub-action" type="submit">
+<button id="grid-next" class="btn-sub-action" type="submit">
 <span>Next</span>
 </button>
 </div>

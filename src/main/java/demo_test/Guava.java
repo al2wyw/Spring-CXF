@@ -64,7 +64,6 @@ public class Guava {
 				.compare(arg0.getI(), arg1.getI())
 				.compare(arg0.getJ(), arg1.getJ())
 				.result();
-				
 			}
 			
 		});

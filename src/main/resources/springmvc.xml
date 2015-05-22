@@ -135,6 +135,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath*:xpadro/tutorial/rest/repository/*Mapper.xml" />
 	</bean>
