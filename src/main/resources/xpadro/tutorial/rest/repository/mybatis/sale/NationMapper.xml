@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xpadro.tutorial.rest.repository.mybatis.sale.NationMapper" >
+  <resultMap id="BaseResultMap" type="xpadro.tutorial.rest.model.mybatis.sale.Nation" >
+    <id column="N_NATIONKEY" property="n_NATIONKEY" jdbcType="INTEGER" />
+    <result column="N_NAME" property="n_NAME" jdbcType="CHAR" />
+    <result column="N_REGIONKEY" property="n_REGIONKEY" jdbcType="INTEGER" />
+    <result column="N_COMMENT" property="n_COMMENT" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    N_NATIONKEY, N_NAME, N_REGIONKEY, N_COMMENT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="xpadro.tutorial.rest.model.mybatis.sale.NationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from nation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from nation
+    where N_NATIONKEY = #{n_NATIONKEY,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from nation
+    where N_NATIONKEY = #{n_NATIONKEY,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="xpadro.tutorial.rest.model.mybatis.sale.NationExample" >
+    delete from nation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Nation" >
+    insert into nation (N_NATIONKEY, N_NAME, N_REGIONKEY, 
+      N_COMMENT)
+    values (#{n_NATIONKEY,jdbcType=INTEGER}, #{n_NAME,jdbcType=CHAR}, #{n_REGIONKEY,jdbcType=INTEGER}, 
+      #{n_COMMENT,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Nation" >
+    insert into nation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="n_NATIONKEY != null" >
+        N_NATIONKEY,
+      </if>
+      <if test="n_NAME != null" >
+        N_NAME,
+      </if>
+      <if test="n_REGIONKEY != null" >
+        N_REGIONKEY,
+      </if>
+      <if test="n_COMMENT != null" >
+        N_COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="n_NATIONKEY != null" >
+        #{n_NATIONKEY,jdbcType=INTEGER},
+      </if>
+      <if test="n_NAME != null" >
+        #{n_NAME,jdbcType=CHAR},
+      </if>
+      <if test="n_REGIONKEY != null" >
+        #{n_REGIONKEY,jdbcType=INTEGER},
+      </if>
+      <if test="n_COMMENT != null" >
+        #{n_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xpadro.tutorial.rest.model.mybatis.sale.NationExample" resultType="java.lang.Integer" >
+    select count(*) from nation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update nation
+    <set >
+      <if test="record.n_NATIONKEY != null" >
+        N_NATIONKEY = #{record.n_NATIONKEY,jdbcType=INTEGER},
+      </if>
+      <if test="record.n_NAME != null" >
+        N_NAME = #{record.n_NAME,jdbcType=CHAR},
+      </if>
+      <if test="record.n_REGIONKEY != null" >
+        N_REGIONKEY = #{record.n_REGIONKEY,jdbcType=INTEGER},
+      </if>
+      <if test="record.n_COMMENT != null" >
+        N_COMMENT = #{record.n_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update nation
+    set N_NATIONKEY = #{record.n_NATIONKEY,jdbcType=INTEGER},
+      N_NAME = #{record.n_NAME,jdbcType=CHAR},
+      N_REGIONKEY = #{record.n_REGIONKEY,jdbcType=INTEGER},
+      N_COMMENT = #{record.n_COMMENT,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Nation" >
+    update nation
+    <set >
+      <if test="n_NAME != null" >
+        N_NAME = #{n_NAME,jdbcType=CHAR},
+      </if>
+      <if test="n_REGIONKEY != null" >
+        N_REGIONKEY = #{n_REGIONKEY,jdbcType=INTEGER},
+      </if>
+      <if test="n_COMMENT != null" >
+        N_COMMENT = #{n_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where N_NATIONKEY = #{n_NATIONKEY,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Nation" >
+    update nation
+    set N_NAME = #{n_NAME,jdbcType=CHAR},
+      N_REGIONKEY = #{n_REGIONKEY,jdbcType=INTEGER},
+      N_COMMENT = #{n_COMMENT,jdbcType=VARCHAR}
+    where N_NATIONKEY = #{n_NATIONKEY,jdbcType=INTEGER}
+  </update>
+</mapper>

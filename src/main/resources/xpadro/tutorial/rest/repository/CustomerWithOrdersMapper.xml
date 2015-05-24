@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xpadro.tutorial.rest.repository.CustomerWithOrdersMapper" >
+  <resultMap id="BaseResultMap" type="xpadro.tutorial.rest.model.CustomerWithOrders" >
+    <association property="customer" javaType="xpadro.tutorial.rest.model.mybatis.sale.Customer">
+      <id column="C_CUSTKEY" jdbcType="INTEGER" property="c_CUSTKEY" />
+      <result column="C_NAME" jdbcType="VARCHAR" property="c_NAME" />
+      <result column="C_ADDRESS" jdbcType="VARCHAR" property="c_ADDRESS" />
+      <result column="C_NATIONKEY" jdbcType="INTEGER" property="c_NATIONKEY" />
+      <result column="C_PHONE" jdbcType="CHAR" property="c_PHONE" />
+      <result column="C_ACCTBAL" jdbcType="DOUBLE" property="c_ACCTBAL" />
+      <result column="C_MKTSEGMENT" jdbcType="CHAR" property="c_MKTSEGMENT" />
+      <result column="C_COMMENT" jdbcType="VARCHAR" property="c_COMMENT" />
+    </association>
+    <collection property="orders" ofType="xpadro.tutorial.rest.model.mybatis.sale.Orders">
+      <id column="O_ORDERKEY" property="o_ORDERKEY" jdbcType="INTEGER" />
+      <result column="O_CUSTKEY" property="o_CUSTKEY" jdbcType="INTEGER" />
+      <result column="O_ORDERSTATUS" property="o_ORDERSTATUS" jdbcType="CHAR" />
+      <result column="O_TOTALPRICE" property="o_TOTALPRICE" jdbcType="DOUBLE" />
+      <result column="O_ORDERDATE" property="o_ORDERDATE" jdbcType="DATE" />
+      <result column="O_ORDERPRIORITY" property="o_ORDERPRIORITY" jdbcType="CHAR" />
+      <result column="O_CLERK" property="o_CLERK" jdbcType="CHAR" />
+      <result column="O_SHIPPRIORITY" property="o_SHIPPRIORITY" jdbcType="INTEGER" />
+      <result column="O_COMMENT" property="o_COMMENT" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <select id="getCustomerWithOrdersById" resultMap="BaseResultMap">
+    SELECT
+      C_CUSTKEY, C_NAME, C_ADDRESS, C_NATIONKEY, C_PHONE, C_ACCTBAL, C_MKTSEGMENT, C_COMMENT,
+      O_ORDERKEY, O_CUSTKEY, O_ORDERSTATUS, O_TOTALPRICE, O_ORDERDATE, O_ORDERPRIORITY, O_CLERK, O_SHIPPRIORITY, O_COMMENT
+     FROM customer JOIN orders ON C_CUSTKEY = O_CUSTKEY WHERE C_CUSTKEY = #{id, jdbcType=INTEGER}
+  </select>
+</mapper>

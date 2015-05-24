@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xpadro.tutorial.rest.repository.mybatis.sale.RegionMapper" >
+  <resultMap id="BaseResultMap" type="xpadro.tutorial.rest.model.mybatis.sale.Region" >
+    <id column="R_REGIONKEY" property="r_REGIONKEY" jdbcType="INTEGER" />
+    <result column="R_NAME" property="r_NAME" jdbcType="CHAR" />
+    <result column="R_COMMENT" property="r_COMMENT" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    R_REGIONKEY, R_NAME, R_COMMENT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="xpadro.tutorial.rest.model.mybatis.sale.RegionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from region
+    where R_REGIONKEY = #{r_REGIONKEY,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from region
+    where R_REGIONKEY = #{r_REGIONKEY,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="xpadro.tutorial.rest.model.mybatis.sale.RegionExample" >
+    delete from region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Region" >
+    insert into region (R_REGIONKEY, R_NAME, R_COMMENT
+      )
+    values (#{r_REGIONKEY,jdbcType=INTEGER}, #{r_NAME,jdbcType=CHAR}, #{r_COMMENT,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Region" >
+    insert into region
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="r_REGIONKEY != null" >
+        R_REGIONKEY,
+      </if>
+      <if test="r_NAME != null" >
+        R_NAME,
+      </if>
+      <if test="r_COMMENT != null" >
+        R_COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="r_REGIONKEY != null" >
+        #{r_REGIONKEY,jdbcType=INTEGER},
+      </if>
+      <if test="r_NAME != null" >
+        #{r_NAME,jdbcType=CHAR},
+      </if>
+      <if test="r_COMMENT != null" >
+        #{r_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xpadro.tutorial.rest.model.mybatis.sale.RegionExample" resultType="java.lang.Integer" >
+    select count(*) from region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update region
+    <set >
+      <if test="record.r_REGIONKEY != null" >
+        R_REGIONKEY = #{record.r_REGIONKEY,jdbcType=INTEGER},
+      </if>
+      <if test="record.r_NAME != null" >
+        R_NAME = #{record.r_NAME,jdbcType=CHAR},
+      </if>
+      <if test="record.r_COMMENT != null" >
+        R_COMMENT = #{record.r_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update region
+    set R_REGIONKEY = #{record.r_REGIONKEY,jdbcType=INTEGER},
+      R_NAME = #{record.r_NAME,jdbcType=CHAR},
+      R_COMMENT = #{record.r_COMMENT,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Region" >
+    update region
+    <set >
+      <if test="r_NAME != null" >
+        R_NAME = #{r_NAME,jdbcType=CHAR},
+      </if>
+      <if test="r_COMMENT != null" >
+        R_COMMENT = #{r_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where R_REGIONKEY = #{r_REGIONKEY,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Region" >
+    update region
+    set R_NAME = #{r_NAME,jdbcType=CHAR},
+      R_COMMENT = #{r_COMMENT,jdbcType=VARCHAR}
+    where R_REGIONKEY = #{r_REGIONKEY,jdbcType=INTEGER}
+  </update>
+</mapper>

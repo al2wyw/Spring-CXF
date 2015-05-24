@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xpadro.tutorial.rest.repository.mybatis.sale.PartsuppMapper" >
+  <resultMap id="BaseResultMap" type="xpadro.tutorial.rest.model.mybatis.sale.Partsupp" >
+    <id column="PS_PARTKEY" property="PS_PARTKEY" jdbcType="INTEGER" />
+    <id column="PS_SUPPKEY" property="PS_SUPPKEY" jdbcType="INTEGER" />
+    <result column="PS_AVAILQTY" property="PS_AVAILQTY" jdbcType="INTEGER" />
+    <result column="PS_SUPPLYCOST" property="PS_SUPPLYCOST" jdbcType="DOUBLE" />
+    <result column="PS_COMMENT" property="PS_COMMENT" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PS_PARTKEY, PS_SUPPKEY, PS_AVAILQTY, PS_SUPPLYCOST, PS_COMMENT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="xpadro.tutorial.rest.model.mybatis.sale.PartsuppExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from partsupp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="xpadro.tutorial.rest.model.mybatis.sale.PartsuppKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from partsupp
+    where PS_PARTKEY = #{PS_PARTKEY,jdbcType=INTEGER}
+      and PS_SUPPKEY = #{PS_SUPPKEY,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="xpadro.tutorial.rest.model.mybatis.sale.PartsuppKey" >
+    delete from partsupp
+    where PS_PARTKEY = #{PS_PARTKEY,jdbcType=INTEGER}
+      and PS_SUPPKEY = #{PS_SUPPKEY,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="xpadro.tutorial.rest.model.mybatis.sale.PartsuppExample" >
+    delete from partsupp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Partsupp" >
+    insert into partsupp (PS_PARTKEY, PS_SUPPKEY, PS_AVAILQTY, 
+      PS_SUPPLYCOST, PS_COMMENT)
+    values (#{PS_PARTKEY,jdbcType=INTEGER}, #{PS_SUPPKEY,jdbcType=INTEGER}, #{PS_AVAILQTY,jdbcType=INTEGER}, 
+      #{PS_SUPPLYCOST,jdbcType=DOUBLE}, #{PS_COMMENT,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Partsupp" >
+    insert into partsupp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="PS_PARTKEY != null" >
+        PS_PARTKEY,
+      </if>
+      <if test="PS_SUPPKEY != null" >
+        PS_SUPPKEY,
+      </if>
+      <if test="PS_AVAILQTY != null" >
+        PS_AVAILQTY,
+      </if>
+      <if test="PS_SUPPLYCOST != null" >
+        PS_SUPPLYCOST,
+      </if>
+      <if test="PS_COMMENT != null" >
+        PS_COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="PS_PARTKEY != null" >
+        #{PS_PARTKEY,jdbcType=INTEGER},
+      </if>
+      <if test="PS_SUPPKEY != null" >
+        #{PS_SUPPKEY,jdbcType=INTEGER},
+      </if>
+      <if test="PS_AVAILQTY != null" >
+        #{PS_AVAILQTY,jdbcType=INTEGER},
+      </if>
+      <if test="PS_SUPPLYCOST != null" >
+        #{PS_SUPPLYCOST,jdbcType=DOUBLE},
+      </if>
+      <if test="PS_COMMENT != null" >
+        #{PS_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xpadro.tutorial.rest.model.mybatis.sale.PartsuppExample" resultType="java.lang.Integer" >
+    select count(*) from partsupp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update partsupp
+    <set >
+      <if test="record.PS_PARTKEY != null" >
+        PS_PARTKEY = #{record.PS_PARTKEY,jdbcType=INTEGER},
+      </if>
+      <if test="record.PS_SUPPKEY != null" >
+        PS_SUPPKEY = #{record.PS_SUPPKEY,jdbcType=INTEGER},
+      </if>
+      <if test="record.PS_AVAILQTY != null" >
+        PS_AVAILQTY = #{record.PS_AVAILQTY,jdbcType=INTEGER},
+      </if>
+      <if test="record.PS_SUPPLYCOST != null" >
+        PS_SUPPLYCOST = #{record.PS_SUPPLYCOST,jdbcType=DOUBLE},
+      </if>
+      <if test="record.PS_COMMENT != null" >
+        PS_COMMENT = #{record.PS_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update partsupp
+    set PS_PARTKEY = #{record.PS_PARTKEY,jdbcType=INTEGER},
+      PS_SUPPKEY = #{record.PS_SUPPKEY,jdbcType=INTEGER},
+      PS_AVAILQTY = #{record.PS_AVAILQTY,jdbcType=INTEGER},
+      PS_SUPPLYCOST = #{record.PS_SUPPLYCOST,jdbcType=DOUBLE},
+      PS_COMMENT = #{record.PS_COMMENT,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Partsupp" >
+    update partsupp
+    <set >
+      <if test="PS_AVAILQTY != null" >
+        PS_AVAILQTY = #{PS_AVAILQTY,jdbcType=INTEGER},
+      </if>
+      <if test="PS_SUPPLYCOST != null" >
+        PS_SUPPLYCOST = #{PS_SUPPLYCOST,jdbcType=DOUBLE},
+      </if>
+      <if test="PS_COMMENT != null" >
+        PS_COMMENT = #{PS_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PS_PARTKEY = #{PS_PARTKEY,jdbcType=INTEGER}
+      and PS_SUPPKEY = #{PS_SUPPKEY,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xpadro.tutorial.rest.model.mybatis.sale.Partsupp" >
+    update partsupp
+    set PS_AVAILQTY = #{PS_AVAILQTY,jdbcType=INTEGER},
+      PS_SUPPLYCOST = #{PS_SUPPLYCOST,jdbcType=DOUBLE},
+      PS_COMMENT = #{PS_COMMENT,jdbcType=VARCHAR}
+    where PS_PARTKEY = #{PS_PARTKEY,jdbcType=INTEGER}
+      and PS_SUPPKEY = #{PS_SUPPKEY,jdbcType=INTEGER}
+  </update>
+</mapper>
