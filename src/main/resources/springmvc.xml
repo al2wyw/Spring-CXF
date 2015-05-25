@@ -101,6 +101,14 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	    </constructor-arg>  
 	</bean> 
 	
+	<bean id="profileBean" class="xpadro.tutorial.rest.util.PerformanceLogAspect"/>
+	<aop:config>
+		<aop:aspect ref="profileBean">
+			<!-- false -->
+			<aop:around method="profile" pointcut="execution(* xpadro.tutorial.rest.repository.mybatis.sale..*+.*(*))"/>
+		</aop:aspect>
+	</aop:config>
+	
     <!-- database setting -->
 	 <bean id="dbcpDataSource" abstract="true">
              <property name="maxActive" value="100" />
