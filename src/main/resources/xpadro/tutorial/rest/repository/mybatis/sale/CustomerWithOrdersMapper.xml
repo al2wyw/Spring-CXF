@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="xpadro.tutorial.rest.repository.CustomerWithOrdersMapper" >
+<mapper namespace="xpadro.tutorial.rest.repository.mybatis.sale.CustomerWithOrdersMapper" >
   <resultMap id="BaseResultMap" type="xpadro.tutorial.rest.model.CustomerWithOrders" >
     <association property="customer" javaType="xpadro.tutorial.rest.model.mybatis.sale.Customer">
       <id column="C_CUSTKEY" jdbcType="INTEGER" property="c_CUSTKEY" />

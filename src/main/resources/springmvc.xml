@@ -105,7 +105,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	<aop:config>
 		<aop:aspect ref="profileBean">
 			<!-- false -->
-			<aop:around method="profile" pointcut="execution(* xpadro.tutorial.rest.repository.mybatis.sale..*+.*(*))"/>
+			<aop:around method="profile" pointcut="execution(* xpadro.tutorial.rest.repository..*+.*(..))"/>
 		</aop:aspect>
 	</aop:config>
 	
@@ -145,11 +145,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath*:xpadro/tutorial/rest/repository/*Mapper.xml" />
+		<property name="mapperLocations" value="classpath*:xpadro/tutorial/rest/repository/mybatis/*Mapper.xml" />
 	</bean>
 	<!-- alternative to use  MapperFactoryBean to generate the mapper bean -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="xpadro.tutorial.rest.repository" />
+		<property name="basePackage" value="xpadro.tutorial.rest.repository.mybatis" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 

@@ -1,4 +1,4 @@
-package xpadro.tutorial.rest.repository;
+package xpadro.tutorial.rest.repository.mybatis.sale;
 
 import xpadro.tutorial.rest.model.CustomerWithOrders;
 

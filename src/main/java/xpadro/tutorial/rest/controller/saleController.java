@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import xpadro.tutorial.rest.model.CustomerWithOrders;
 import xpadro.tutorial.rest.model.mybatis.sale.Lineitem;
 import xpadro.tutorial.rest.model.mybatis.sale.LineitemKey;
-import xpadro.tutorial.rest.repository.CustomerWithOrdersMapper;
+import xpadro.tutorial.rest.repository.mybatis.sale.CustomerWithOrdersMapper;
 import xpadro.tutorial.rest.repository.mybatis.sale.LineitemMapper;
 
 @Controller

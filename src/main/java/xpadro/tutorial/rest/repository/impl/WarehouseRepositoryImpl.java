@@ -1,4 +1,4 @@
-package xpadro.tutorial.rest.repository;
+package xpadro.tutorial.rest.repository.impl;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import xpadro.tutorial.rest.model.Product;
 import xpadro.tutorial.rest.model.Warehouse;
+import xpadro.tutorial.rest.repository.WarehouseRepository;
 
 /**
  * A stub repository that uses dummy data for testing

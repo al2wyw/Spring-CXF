@@ -8,6 +8,7 @@ import org.testng.AssertJUnit;
 
 import xpadro.tutorial.rest.model.Product;
 import xpadro.tutorial.rest.model.Warehouse;
+import xpadro.tutorial.rest.repository.impl.WarehouseRepositoryImpl;
 
 public class WarehouseRepositoryImplTest {
 	@Test
