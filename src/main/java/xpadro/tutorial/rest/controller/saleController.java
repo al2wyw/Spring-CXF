@@ -77,6 +77,7 @@ public class saleController {
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
 	public CustomerWithOrders selectByPrimaryKey(@RequestParam("key")int key){
+		customerWithOrdersMapper.getMapById(key);
 		return customerWithOrdersMapper.getCustomerWithOrdersById(key);
 	}
 }

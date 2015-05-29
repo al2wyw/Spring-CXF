@@ -1,5 +1,7 @@
 package xpadro.tutorial.rest.repository.mybatis.sale;
 
+import java.util.Map;
+
 import xpadro.tutorial.rest.model.CustomerWithOrders;
 
 /**
@@ -7,4 +9,5 @@ import xpadro.tutorial.rest.model.CustomerWithOrders;
  */
 public interface CustomerWithOrdersMapper {
     CustomerWithOrders getCustomerWithOrdersById(int i);
+    Map<?,?> getMapById(int i);
 }

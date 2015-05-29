@@ -31,4 +31,11 @@
       O_ORDERKEY, O_CUSTKEY, O_ORDERSTATUS, O_TOTALPRICE, O_ORDERDATE, O_ORDERPRIORITY, O_CLERK, O_SHIPPRIORITY, O_COMMENT
      FROM customer JOIN orders ON C_CUSTKEY = O_CUSTKEY WHERE C_CUSTKEY = #{id, jdbcType=INTEGER}
   </select>
+  
+  <select id="getMapById" resultType="map">
+  	SELECT
+      C_CUSTKEY, C_NAME, C_ADDRESS 
+      FROM customer
+      WHERE C_CUSTKEY = #{id, jdbcType=INTEGER}
+  </select>
 </mapper>
