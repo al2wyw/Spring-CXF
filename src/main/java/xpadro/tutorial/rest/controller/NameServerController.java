@@ -1,11 +1,11 @@
 package xpadro.tutorial.rest.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.net.InetAddress;
 
 /**
  * Created by apple on 24/03/2018.
@@ -13,10 +13,16 @@ import java.net.InetAddress;
 @Controller
 public class NameServerController {
 
+    @Value("diamond.server")
+    private String diamondServer;
+
+    @Value("config.server")
+    private String configServer;
+
     @RequestMapping(value = "diamond-server/diamond",method = RequestMethod.GET)
     @ResponseBody
     public String getDiamondAddress() throws Exception{
-        return "192.168.1.104";
+        return diamondServer;
     }
 
     @RequestMapping(value = "diamond-server/status.taobao",method = RequestMethod.GET)
@@ -28,6 +34,6 @@ public class NameServerController {
     @RequestMapping(value = "configserver/serverlist",method = RequestMethod.GET)
     @ResponseBody
     public String getConfigServerAddress() throws Exception{
-        return "192.168.1.104";
+        return configServer;
     }
 }
