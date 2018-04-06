@@ -13,15 +13,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class NameServerController {
 
-    @Value("diamond.server")
+    @Value("${diamond.server}")
     private String diamondServer;
 
-    @Value("config.server")
+    @Value("${config.server}")
     private String configServer;
 
     @RequestMapping(value = "diamond-server/diamond",method = RequestMethod.GET)
     @ResponseBody
     public String getDiamondAddress() throws Exception{
+        return diamondServer;
+    }
+
+    @RequestMapping(value = "diamond-server/basestone",method = RequestMethod.GET)
+    @ResponseBody
+    public String getBasestoneDiamondAddress() throws Exception{
         return diamondServer;
     }
 
